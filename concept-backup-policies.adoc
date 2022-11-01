@@ -1,0 +1,39 @@
+---
+sidebar: sidebar 
+permalink: concept-backup-policies.html 
+keywords: snapvault, archive, archiving, retention 
+summary: Im Gegensatz zu Mirror-Richtlinien werden bei Backup SnapVault-Richtlinien spezifische Snapshot Kopien auf ein Ziel-Volume repliziert. Es ist wichtig zu verstehen, wie Backup-Richtlinien funktionieren, wenn Sie Ihre eigenen Richtlinien anstelle der Standardrichtlinien verwenden möchten. 
+---
+= Weitere Informationen zu Replizierungsrichtlinien
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Im Gegensatz zu Spiegelungsrichtlinien replizieren Backup-Richtlinien (SnapVault) bestimmte Snapshot Kopien auf ein Ziel-Volume. Es ist wichtig zu verstehen, wie Backup-Richtlinien funktionieren, wenn Sie Ihre eigenen Richtlinien anstelle der Standardrichtlinien verwenden möchten.
+
+
+
+== Verständnis der Beziehung zwischen Snapshot Copy Labels und Backup-Richtlinien
+
+Eine Snapshot-Richtlinie definiert, wie das System Snapshot-Kopien von Volumes erstellt. Die Richtlinie gibt an, wann die Snapshot Kopien erstellt werden sollen, wie viele Kopien aufbewahrt werden sollen und wie sie beschriften werden. Ein System erstellt beispielsweise jeden Tag um 12:10 Uhr eine Snapshot Kopie, behält die beiden neuesten Kopien bei und kennzeichnet sie "täglich".
+
+Eine Backup-Richtlinie enthält Regeln, die festlegen, welche benannten Snapshot Kopien auf ein Ziel-Volume repliziert werden sollen und wie viele Kopien aufbewahrt werden sollen. Die in einer Backup-Richtlinie definierten Bezeichnungen müssen mit einer oder mehreren Bezeichnungen übereinstimmen, die in einer Snapshot-Richtlinie definiert sind. Andernfalls kann das System keine Snapshot Kopien replizieren.
+
+Eine Backup-Policy, die beispielsweise die Bezeichnungen "täglich" und "wöchentlich" enthält, führt zur Replizierung von Snapshot Kopien, die nur diese Bezeichnungen enthalten. Es werden keine anderen Snapshot Kopien repliziert, wie im folgenden Bild dargestellt:
+
+image:diagram_replication_snapvault_policy.png["Diese Abbildung zeigt eine Snapshot-Richtlinie, ein Quell-Volume, die aus der Snapshot-Richtlinie erstellten Snapshot-Kopien und anschließend auf der Grundlage einer Backup-Richtlinie die Replizierung dieser Snapshot-Kopien mit den „täglichen“ und „wöchentlichen“ Beschriftungen in ein Ziel-Volume."]
+
+
+
+== Standardrichtlinien und benutzerdefinierte Richtlinien
+
+Die Standard-Snapshot-Richtlinie erstellt stündlich, täglich und wöchentlich Snapshot Kopien, wobei sechs Stunden, zwei Tage und zwei wöchentliche Snapshot Kopien aufbewahrt werden.
+
+Sie können problemlos eine Standard-Backup-Richtlinie mit der Standard-Snapshot-Richtlinie verwenden. Die Standard-Backup-Richtlinien replizieren tägliche und wöchentliche Snapshot Kopien, wobei sieben tägliche und 52 wöchentliche Snapshot Kopien aufbewahrt werden.
+
+Wenn Sie benutzerdefinierte Richtlinien erstellen, müssen die durch diese Richtlinien definierten Bezeichnungen übereinstimmen. Sie können benutzerdefinierte Richtlinien mit System Manager erstellen.

@@ -1,0 +1,71 @@
+---
+sidebar: sidebar 
+permalink: task-managing-replication.html 
+keywords: replication policy, policy, replication, replicating, snapmirror, snapvault, data replication, source, destination, schedule, relationship, break, resync, max transfer, maximum transfer rate, rate, transfer rate, reverse resync, status, replication status, disaster recovery, DR, archive, archiving, retention 
+summary: Nachdem Sie die Datenreplizierung zwischen zwei Systemen eingerichtet haben, können Sie den Zeitplan für die Datenreplizierung und die Beziehung von BlueXP verwalten. 
+---
+= Managen von Zeitplänen und Beziehungen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Nachdem Sie die Datenreplizierung zwischen zwei Systemen eingerichtet haben, können Sie den Zeitplan für die Datenreplizierung und die Beziehung von BlueXP verwalten.
+
+.Schritte
+. Wählen Sie im Navigationsmenü die Option *Schutz > Replikation*.
+. Überprüfen Sie den Status der Datenreplizierungsbeziehungen, um sicherzustellen, dass sie in Ordnung sind.
++
+
+NOTE: Wenn der Status einer Beziehung inaktiv ist und der Spiegelungsstatus nicht initialisiert ist, müssen Sie die Beziehung vom Zielsystem initialisieren, damit die Datenreplizierung gemäß dem definierten Zeitplan ausgeführt werden kann. Sie können die Beziehung mit System Manager oder der Befehlszeilenschnittstelle (CLI) initialisieren. Diese Zustände können angezeigt werden, wenn das Zielsystem ausfällt und dann wieder online geht.
+
+. Klicken Sie auf das Aktionsmenü für eine Volume-Beziehung und wählen Sie eine der verfügbaren Aktionen aus.
++
+image:screenshot_replication_managing.gif["Screenshot: Zeigt die Liste der Aktionen an, die auf der Seite \"Replication Status\" verfügbar sind."]
+
++
+Die folgende Tabelle beschreibt die verfügbaren Aktionen:
+
++
+[cols="15,85"]
+|===
+| Aktion | Beschreibung 
+
+
+| Informationsdaten | Zeigt Details zur Volume-Beziehung an: Übertragungsinformationen, Informationen zur letzten Übertragung, Details zum Volume und Informationen zur Schutzrichtlinie, die der Beziehung zugeordnet sind. 
+
+
+| Pause | Bricht die Beziehung zwischen Quell- und Ziel-Volumes und aktiviert das Ziel-Volume für den Datenzugriff. Diese Option wird in der Regel verwendet, wenn das Quell-Volume aufgrund von Ereignissen wie Datenbeschädigung, versehentlichem Löschen oder einem Offline-Status keine Daten bereitstellen kann.https://docs.netapp.com/us-en/ontap-sm-classic/volume-disaster-recovery/index.html["Erfahren Sie, wie Sie ein Ziel-Volume für Datenzugriff konfigurieren und ein Quell-Volume in der ONTAP Dokumentation neu aktivieren"^] 
+
+
+| Neu synchronisieren  a| 
+Stellt eine unterbrochene Beziehung zwischen Volumes wieder her und setzt die Datenreplizierung gemäß dem definierten Zeitplan fort.
+
+
+NOTE: Wenn Sie die Volumes erneut synchronisieren, werden die Inhalte auf dem Ziel-Volume durch die Inhalte auf dem Quell-Volume überschrieben.
+
+Erfahren Sie, wie Sie eine umgekehrte Resynchronisierung durchführen, die die Daten vom Ziel-Volume zum Quell-Volume neu synchronisiert, besuchen Sie das https://docs.netapp.com/us-en/ontap-sm-classic/volume-disaster-recovery/index.html["ONTAP-Dokumentation"^].
+
+
+
+| Reverse Resync | Kehrt die Rollen der Quell- und Ziel-Volumes um. Der Inhalt des ursprünglichen Quell-Volumes wird durch den Inhalt des Ziel-Volumes überschrieben. Dies ist hilfreich, wenn Sie ein Quell-Volume, das offline gegangen ist, reaktivieren möchten. Alle Daten, die zwischen der letzten Datenreplizierung und dem Zeitpunkt, zu dem das Quell-Volume deaktiviert wurde, auf das ursprüngliche Quell-Volume geschrieben wurden, bleiben nicht erhalten. 
+
+
+| Zeitplan bearbeiten | Ermöglicht die Auswahl eines anderen Zeitplans für die Datenreplizierung. 
+
+
+| Max. Übertragungsrate bearbeiten | Hier können Sie die maximale Rate (in Kilobyte pro Sekunde) bearbeiten, mit der Daten übertragen werden können. 
+
+
+| Aktualisierung | Startet einen inkrementellen Transfer, um das Zielvolume zu aktualisieren. 
+
+
+| Löschen | Löscht die Data-Protection-Beziehung zwischen Quell- und Ziel-Volumes, d. H., die Datenreplizierung findet nicht mehr zwischen den Volumes statt. Durch diese Aktion wird das Ziel-Volume nicht für den Datenzugriff aktiviert. Durch diese Aktion werden auch die Cluster-Peer-Beziehung und die SVM-Peer-Beziehung (Storage VM) gelöscht, falls keine anderen Datensicherungsbeziehungen zwischen den Systemen bestehen. 
+|===
+
+
+Nachdem Sie eine Aktion ausgewählt haben, aktualisiert BlueXP die Beziehung oder den Zeitplan.

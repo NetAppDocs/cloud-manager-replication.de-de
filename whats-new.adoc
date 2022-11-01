@@ -1,0 +1,69 @@
+---
+sidebar: sidebar 
+permalink: whats-new.html 
+keywords: 'what"s new, features, new, release notes, bugs, limitations, known issues, enhancements, fixes' 
+summary: 'Erfahren Sie, welche Neuerungen der Replication-Service in BlueXP (früher Cloud Manager) bietet.' 
+---
+= Was ist neu
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Erfahren Sie, welche Neuerungen der Replication-Service in BlueXP (früher Cloud Manager) bietet.
+
+
+
+== September 18 2022
+
+
+
+=== FSX für ONTAP auf Cloud Volumes ONTAP
+
+Sie können jetzt Daten von einem Amazon FSX für ONTAP-Dateisystem auf Cloud Volumes ONTAP replizieren.
+
+https://docs.netapp.com/us-en/cloud-manager-replication/task-replicating-data.html["Hier erfahren Sie, wie Sie Datenreplizierung einrichten"].
+
+
+
+== 31 Juli 2022
+
+
+
+=== FSX für ONTAP als Datenquelle
+
+Sie können jetzt Daten von einem Amazon FSX für ONTAP-Dateisystem auf die folgenden Ziele replizieren:
+
+* Amazon FSX für ONTAP
+* On-Premises-ONTAP-Cluster
+
+
+https://docs.netapp.com/us-en/cloud-manager-replication/task-replicating-data.html["Hier erfahren Sie, wie Sie Datenreplizierung einrichten"].
+
+
+
+== September 2021
+
+
+
+=== Unterstützung von Amazon FSX für ONTAP
+
+Sie können jetzt Daten von einem Cloud Volumes ONTAP System oder einem lokalen ONTAP Cluster auf ein Amazon FSX für ONTAP Filesystem replizieren.
+
+https://docs.netapp.com/us-en/cloud-manager-replication/task-replicating-data.html["Hier erfahren Sie, wie Sie Datenreplizierung einrichten"].
+
+
+
+== 5 Mai 2021
+
+
+
+=== Neu gestaltete Oberfläche
+
+Die Registerkarte „Replication“ wurde neu gestaltet, um die Benutzerfreundlichkeit zu gewährleisten und die Benutzeroberfläche von Cloud Manager anzupassen.
+
+image:https://raw.githubusercontent.com/NetAppDocs/cloud-manager-replication/main/media/replication.gif["Ein Screenshot der Registerkarte „überarbeitete Replizierung“ in Cloud Manager, in der eine Liste der Volume-Beziehungen angezeigt wird."]

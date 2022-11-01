@@ -1,0 +1,88 @@
+---
+sidebar: sidebar 
+permalink: concept-replication.html 
+keywords: ontap, cluster, discover, manage, BlueXP, hybrid cloud, replication policy, policy, replication, replicating, snapmirror, snapvault, data replication, fanout, cascade, source, destination, disaster recovery, DR, archive, archiving, retention 
+summary: NetApp SnapMirror repliziert Daten mit hohen Geschwindigkeiten über LAN oder WAN, so dass Sie in virtuellen und herkömmlichen Umgebungen hohe Datenverfügbarkeit und schnelle Datenreplizierung erhalten. Durch das Replizieren und ständige Aktualisieren der sekundären Daten auf NetApp Storage-Systemen sind die Daten immer aktuell und verfügbar. Es sind keine externen Replizierungsserver erforderlich. 
+---
+= Erfahren Sie mehr über den Replikationsdienst
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+NetApp SnapMirror repliziert Daten mit hohen Geschwindigkeiten über LAN oder WAN, so dass Sie in virtuellen und herkömmlichen Umgebungen hohe Datenverfügbarkeit und schnelle Datenreplizierung erhalten. Durch das Replizieren und ständige Aktualisieren der sekundären Daten auf NetApp Storage-Systemen sind die Daten immer aktuell und verfügbar. Es sind keine externen Replizierungsserver erforderlich.
+
+
+
+== Funktionen
+
+* Datenreplizierung zwischen ONTAP Storage-Systemen zur Unterstützung von Backup und Disaster Recovery in der Cloud oder zwischen Clouds
+* Stellen Sie die Zuverlässigkeit Ihrer DR-Umgebung mit Hochverfügbarkeit sicher.
+* Die effiziente Replizierung auf Blockebene zwischen ONTAP Storage erfolgt schnell und effizient und bietet granulare Recovery-Punkte sowohl für DR als auch für Backups.
+
+
+
+
+== Kosten
+
+NetApp berechnet Ihnen keine Gebühr für die Verwendung des Replizierungs-Service, Sie müssen jedoch Ihren Cloud-Provider nach geltenden Datenein- und -Ausgangs-Kosten fragen.
+
+
+
+== Unterstützte Arbeitsumgebungen
+
+BlueXP ermöglicht die Datenreplizierung zwischen den folgenden Typen von Arbeitsumgebungen.
+
+[cols="30,30"]
+|===
+| Arbeitsumgebung der Quelle | Unterstützte Zielarbeitsumgebungen 
+
+
+| Cloud Volumes ONTAP  a| 
+* Amazon FSX für ONTAP
+* Cloud Volumes ONTAP
+* Lokaler ONTAP-Cluster
+
+
+
+
+| Lokaler ONTAP-Cluster  a| 
+* Amazon FSX für ONTAP
+* Cloud Volumes ONTAP
+* Lokaler ONTAP-Cluster
+
+
+
+
+| Amazon FSX für ONTAP  a| 
+* Amazon FSX für ONTAP
+* Cloud Volumes ONTAP
+* Lokaler ONTAP-Cluster
+
+
+|===
+
+
+== Funktionsweise der Datenreplizierung
+
+BlueXP vereinfacht die Datenreplizierung zwischen Volumes auf separaten ONTAP Systemen mithilfe von SnapMirror und SnapVault Technologien. Sie müssen lediglich das Quell-Volume und das Ziel-Volume identifizieren und dann eine Replizierungsrichtlinie und einen Zeitplan auswählen.
+
+Bei Cloud Volumes ONTAP kauft BlueXP die erforderlichen Festplatten, konfiguriert Beziehungen, wendet die Replizierungsrichtlinie an und initiiert anschließend den Basistransfer zwischen den Volumes.
+
+
+NOTE: Die Basisplanübertragung enthält eine vollständige Kopie der Quelldaten. Nachfolgende Übertragungen enthalten differenzielle Kopien der Quelldaten.
+
+
+
+== Unterstützte Datensicherungs-Konfigurationen
+
+BlueXP unterstützt einfache, Fanout- und Kaskadenkonfigurationen für die Datensicherung:
+
+* In einer einfachen Konfiguration erfolgt die Replizierung von Volume A auf Volume B.
+* In einer Fanout-Konfiguration erfolgt die Replizierung von Volume A zu mehreren Zielen.
+* Bei einer kaskadierten Konfiguration erfolgt die Replizierung von Volume A auf Volume B und von Volume B auf Volume C.
+

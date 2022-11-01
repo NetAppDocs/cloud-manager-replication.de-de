@@ -1,0 +1,60 @@
+---
+sidebar: sidebar 
+permalink: concept-replication-policies.html 
+keywords: replication policy, policy, replication, replicating, snapmirror, snapvault, data replication, disaster recovery, DR 
+summary: Sie können Daten zwischen BlueXP-Arbeitsumgebungen replizieren. Sie können eine einmalige Datenreplizierung zum Verschieben von Daten in die und aus der Cloud oder einen wiederkehrenden Zeitplan für Disaster Recovery oder langfristige Aufbewahrung wählen. 
+---
+= Weitere Informationen zu Replizierungsrichtlinien
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Möglicherweise benötigen Sie Hilfe bei der Auswahl einer Replizierungsrichtlinie, wenn Sie die Datenreplizierung in BlueXP einrichten. Eine Replizierungsrichtlinie definiert, wie das Storage-System Daten von einem Quell-Volume auf ein Ziel-Volume repliziert.
+
+
+
+== Was sind Replizierungsrichtlinien
+
+Das Betriebssystem ONTAP erstellt automatisch Backups mit dem Namen Snapshot Kopien. Eine Snapshot Kopie ist ein schreibgeschütztes Image eines Volumes, das den Status des Dateisystems zu einem bestimmten Zeitpunkt erfasst.
+
+Wenn Sie Daten zwischen Systemen replizieren, replizieren Sie Snapshot Kopien von einem Quell-Volume zu einem Ziel-Volume. Eine Replizierungsrichtlinie gibt an, welche Snapshot Kopien vom Quell-Volume auf das Ziel-Volume repliziert werden sollen.
+
+
+TIP: Replizierungsrichtlinien werden auch als _Protection_ -Richtlinien bezeichnet, da sie durch SnapMirror und SnapVault Technologien unterstützt werden, die Disaster Recovery-Schutz und Disk-to-Disk Backup und Recovery bieten.
+
+Die folgende Abbildung zeigt die Beziehung zwischen Snapshot Kopien und Replizierungsrichtlinien:
+
+image:diagram_replication_policies.png["Diese Abbildung zeigt Snapshot Kopien auf einem Quell-Volume und eine Replizierungsrichtlinie, die die Replizierung aller oder bestimmter Snapshot Kopien vom Quell-Volume auf das Ziel-Volume festlegt."]
+
+
+
+== Arten von Replizierungsrichtlinien
+
+Es gibt drei Arten von Replizierungsrichtlinien:
+
+* Eine _Mirror_ Richtlinie repliziert neu erstellte Snapshot Kopien zu einem Ziel-Volume.
++
+Sie können diese Snapshot Kopien verwenden, um das Quell-Volume als Vorbereitung für die Disaster Recovery oder für die einmalige Datenreplizierung zu schützen. Sie können das Ziel-Volume jederzeit für den Datenzugriff aktivieren.
+
+* Eine _Backup_-Richtlinie repliziert bestimmte Snapshot-Kopien zu einem Ziel-Volume und speichert diese in der Regel für einen längeren Zeitraum, als es auf dem Quell-Volume der Fall wäre.
++
+Sie können Daten aus diesen Snapshot Kopien wiederherstellen, wenn Daten beschädigt oder verloren gehen, und sie zur Einhaltung von Standards und zu anderen Governance-Zwecken aufbewahren.
+
+* Eine Richtlinie „ _Mirror und Backup_“ ermöglicht Disaster Recovery und langfristige Datenhaltung.
++
+Jedes System verfügt über eine standardmäßige Mirror- und Backup-Policy, die in vielen Situationen gut funktioniert. Wenn Sie benutzerdefinierte Richtlinien benötigen, können Sie mit System Manager eigene Richtlinien erstellen.
+
+
+
+Die folgenden Abbildungen zeigen den Unterschied zwischen den Richtlinien für Spiegelung und Sicherung. Eine Spiegelungsrichtlinie spiegelt die auf dem Quell-Volume verfügbaren Snapshot Kopien wider.
+
+image:diagram_replication_snapmirror.png["Diese Abbildung zeigt Snapshot Kopien auf einem Quell-Volume und einem Ziel-Volume mit Mirror, das das Quell-Volume spiegelt."]
+
+Eine Backup-Policy behält Snapshot-Kopien in der Regel länger bei, als sie auf dem Quell-Volume aufbewahrt werden:
+
+image:diagram_replication_snapvault.png["Diese Abbildung zeigt Snapshot-Kopien auf einem Quell-Volume und einem Backup-Ziel-Volume, das mehr Snapshot-Kopien enthält, da SnapVault Snapshot Kopien zur langfristigen Aufbewahrung aufbewahrt."]

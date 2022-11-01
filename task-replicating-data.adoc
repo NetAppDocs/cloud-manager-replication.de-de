@@ -1,0 +1,123 @@
+---
+sidebar: sidebar 
+permalink: task-replicating-data.html 
+keywords: ontap, cluster, discover, manage, BlueXP, hybrid cloud, replication policy, policy, replication, replicating, snapmirror, snapvault, data replication, fanout, cascade, source, destination, schedule, relationship, max transfer, maximum transfer rate, rate, transfer rate, intercluster lif, replication requirement, requirements, disaster recovery, DR, archive, archiving, retention, amazon fsx for ontap, fsx for ontap 
+summary: Sie können Daten zwischen den Arbeitsumgebungen von ONTAP replizieren, indem Sie sich für eine einmalige Datenreplizierung für Datentransfers oder einen wiederkehrenden Zeitplan für Disaster Recovery oder langfristige Aufbewahrung entscheiden. Sie können beispielsweise die Datenreplizierung eines lokalen ONTAP-Systems auf Cloud Volumes ONTAP für Disaster Recovery einrichten. 
+---
+= Richten Sie die Datenreplizierung ein
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Sie können Daten zwischen den Arbeitsumgebungen von ONTAP replizieren, indem Sie sich für eine einmalige Datenreplizierung für Datentransfers oder einen wiederkehrenden Zeitplan für Disaster Recovery oder langfristige Aufbewahrung entscheiden. Sie können beispielsweise die Datenreplizierung eines lokalen ONTAP-Systems auf Cloud Volumes ONTAP für Disaster Recovery einrichten.
+
+
+
+== Anforderungen an die Datenreplizierung
+
+Bevor Sie die Daten replizieren können, sollten Sie bestätigen, dass bestimmte Anforderungen für Cloud Volumes ONTAP, On-Premises-ONTAP-Cluster oder Amazon FSX für ONTAP erfüllt werden.
+
+Arbeitsumgebungen:: Wenn dies noch nicht geschehen ist, müssen Sie in der Datenreplizierungsbeziehung die Arbeitsumgebungen für Quelle und Ziel erstellen.
++
+--
+* https://docs.netapp.com/us-en/cloud-manager-fsx-ontap/start/task-getting-started-fsx.html["Amazon FSX für ONTAP-Arbeitsumgebungen erstellen"^]
+* https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/task-deploying-otc-aws.html["Starten Sie Cloud Volumes ONTAP in AWS"^]
+* https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/task-deploying-otc-azure.html["Starten Sie Cloud Volumes ONTAP in Azure"^]
+* https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/task-deploying-gcp.html["Einführung von Cloud Volumes ONTAP in GCP"^]
+* https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/task-adding-systems.html["Vorhandene Cloud Volumes ONTAP-Systeme hinzufügen"^]
+* https://docs.netapp.com/us-en/cloud-manager-ontap-onprem/task-discovering-ontap.html["ONTAP Cluster erkennen"^]
+
+
+--
+Versionsanforderungen:: Sie sollten überprüfen, ob die Quell- und Ziel-Volumes kompatible ONTAP Versionen ausführen, bevor Sie Daten replizieren.
++
+--
+https://docs.netapp.com/us-en/ontap/data-protection/compatible-ontap-versions-snapmirror-concept.html["Zeigen Sie kompatible ONTAP Versionen für SnapMirror Beziehungen an"^]
+
+--
+Spezifische Anforderungen für Cloud Volumes ONTAP::
++
+--
+* Die Sicherheitsgruppe der Instanz muss die erforderlichen ein- und ausgehenden Regeln enthalten: Speziell Regeln für ICMP und die Ports 11104 und 11105.
++
+Diese Regeln sind in der vordefinierten Sicherheitsgruppe enthalten.
+
+* Um Daten zwischen zwei Cloud Volumes ONTAP Systemen in verschiedenen Subnetzen zu replizieren, müssen die Subnetze gemeinsam geroutet werden (dies ist die Standardeinstellung).
+* Um Daten zwischen zwei Cloud Volumes ONTAP Systemen bei verschiedenen Cloud-Providern zu replizieren, ist eine VPN-Verbindung zwischen den virtuellen Netzwerken erforderlich.
+
+
+--
+Spezifische Anforderungen für ONTAP Cluster::
++
+--
+* Eine aktive SnapMirror Lizenz muss installiert sein.
+* Wenn sich der Cluster vor Ort befindet, sollte eine Verbindung zwischen Ihrem Unternehmensnetzwerk und Ihrem virtuellen Netzwerk in AWS, Azure oder Google Cloud hergestellt werden. Hierbei handelt es sich in der Regel um eine VPN-Verbindung.
+* ONTAP Cluster müssen zusätzliche Subnetz-, Port-, Firewall- und Cluster-Anforderungen erfüllen.
++
+https://docs.netapp.com/us-en/ontap-sm-classic/peering/reference_prerequisites_for_cluster_peering.html["Anzeigen von Voraussetzungen für Cluster-Peering in der ONTAP-Dokumentation"^]
+
+
+
+--
+Spezifische Anforderungen für Amazon FSX für ONTAP::
++
+--
+* Falls Cloud Volumes ONTAP Teil der Beziehung ist, stellen Sie die Konnektivität zwischen VPCs durch die Aktivierung von VPC-Peering oder die Verwendung eines Transit-Gateways sicher.
+* Wenn ein On-Premises-ONTAP-Cluster Teil der Beziehung ist, stellen Sie über eine Direct-Connect- oder VPN-Verbindung die Konnektivität zwischen dem On-Premises-Netzwerk und der AWS VPC sicher.
+
+
+--
+
+
+
+
+== Replizierung von Daten zwischen Systemen
+
+Sie können Daten replizieren, indem Sie eine einmalige Datenreplizierung auswählen, die Sie beim Verschieben von Daten in die und aus der Cloud oder bei einem wiederkehrenden Zeitplan unterstützen kann. Dies hilft bei Disaster Recovery oder langfristiger Aufbewahrung.
+
+.Schritte
+. Wählen Sie im Navigationsmenü die Option *Storage > Canvas* aus.
+. Wählen Sie auf dem Bildschirm die Arbeitsumgebung aus, die das Quellvolumen enthält, ziehen Sie es in die Arbeitsumgebung, in die Sie das Volume replizieren möchten, und wählen Sie dann *Replikation* aus.
++
+image:screenshot-drag-and-drop.png["Screenshot: Zeigt eine Arbeitsumgebung, die auf einer anderen Arbeitsumgebung platziert wird, um den Datenreplizierungsprozess zu starten."]
+
++
+Die verbleibenden Schritte sind ein Beispiel dafür, wie eine Synchronisierungsbeziehung zwischen Cloud Volumes ONTAP- oder On-Prem-ONTAP-Clustern erstellt wird.
+
+. *Quell- und Ziel-Peering-Setup*: Wenn diese Seite angezeigt wird, wählen Sie alle Intercluster-LIFs für die Cluster-Peer-Beziehung aus.
++
+Das Cluster-übergreifende Netzwerk sollte so konfiguriert werden, dass Cluster-Peers _paarweise vollständige Mesh-Konnektivität_ haben. Das bedeutet, dass jedes Cluster-Paar in einer Cluster-Peer-Beziehung über Konnektivität zwischen allen Intercluster LIFs verfügt.
+
++
+Diese Seiten werden angezeigt, wenn ein ONTAP Cluster mit mehreren LIFs Quelle oder Ziel ist.
+
+. *Quell-Volume-Auswahl*: Wählen Sie das Volumen, das Sie replizieren möchten.
+. *Zielfestplattentyp und Tiering*: Wenn das Ziel ein Cloud Volumes ONTAP-System ist, wählen Sie den Zieldatentyp aus und wählen Sie aus, ob Sie Daten-Tiering aktivieren möchten.
+. *Zielvolume Name*: Geben Sie den Namen des Zieldatenträgers an und wählen Sie das Zielaggregat.
++
+Wenn das Ziel ein ONTAP-Cluster ist, müssen Sie auch die Ziel-Storage-VM angeben.
+
+. *Maximale Übertragungsrate*: Geben Sie die maximale Rate (in Megabyte pro Sekunde) an, mit der Daten übertragen werden können.
++
+Sie sollten die Transferrate begrenzen. Eine unbegrenzte Rate kann sich negativ auf die Leistung anderer Anwendungen auswirken, und es kann sich auf Ihre Internetleistung auswirken.
+
+. *Replikationsrichtlinie*: Wählen Sie eine Standardrichtlinie oder klicken Sie auf *zusätzliche Richtlinien* und wählen Sie dann eine der erweiterten Richtlinien aus.
++
+Hilfe erhalten Sie unter: link:concept-replication-policies.html["Weitere Informationen zu Replizierungsrichtlinien"].
+
++
+Wenn Sie eine benutzerdefinierte Backup- (SnapVault-) Policy wählen, müssen die mit der Policy verknüpften Labels mit den Labels der Snapshot Kopien auf dem Quell-Volume übereinstimmen. Weitere Informationen finden Sie unter link:concept-backup-policies.html["Erfahren Sie, wie Backup-Richtlinien funktionieren"].
+
+. *Zeitplan*: Wählen Sie eine einmalige Kopie oder einen wiederkehrenden Zeitplan.
++
+Es stehen mehrere Standardzeitpläne zur Verfügung. Wenn Sie einen anderen Zeitplan möchten, müssen Sie mithilfe von System Manager einen neuen Zeitplan auf dem Cluster _Destination_ erstellen.
+
+. *Review*: Überprüfen Sie Ihre Auswahl und klicken Sie auf *Go*.
+
+
+BlueXP startet den Datenreplizierungsprozess. Im Replikationsdienst können Sie Details zur Volume-Beziehung anzeigen.
