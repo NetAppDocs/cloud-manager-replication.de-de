@@ -120,4 +120,5 @@ Es stehen mehrere Standardzeitpläne zur Verfügung. Wenn Sie einen anderen Zeit
 . *Review*: Überprüfen Sie Ihre Auswahl und klicken Sie auf *Go*.
 
 
+.Ergebnis
 BlueXP startet den Datenreplizierungsprozess. Im Replikationsdienst können Sie Details zur Volume-Beziehung anzeigen.

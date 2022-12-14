@@ -311,4 +311,7 @@
   <block id="2974170a8b1b5b4a2ac69aacd4c1c9c3" category="list-text">Suchen Sie auf der Seite für die Support-Registrierung die Seriennummer Ihres Kontos.</block>
   <block id="50a1dc01b7312307c34a888071586955" category="list-text">Kopieren Sie die Seriennummer des Kontos von Schritt 2 oben, füllen Sie die Sicherheitsprüfung aus und bestätigen Sie dann, dass Sie die globale Datenschutzrichtlinie von NetApp lesen.</block>
   <block id="cc8b0535948da368f832027c19b7f853" category="list-text">Kopieren Sie die oben angegebene Seriennummer (960xxxx) für das Feld „Seriennummer“. Dadurch wird die Kontobearbeitung beschleunigt.</block>
+  <block id="8eea62084ca7e541d918e823422bd82e" category="paragraph-title">Ergebnis</block>
+  <block id="8fece025a1a8fef7018449bf104a2527" category="paragraph-title">Bevor Sie beginnen</block>
+  <block id="bd965e38a0c9cf27aa1bde099308e23f" category="paragraph-title">Nachdem Sie fertig sind</block>
 </blocks>

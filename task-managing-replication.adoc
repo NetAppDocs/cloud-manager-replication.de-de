@@ -68,4 +68,5 @@ Erfahren Sie, wie Sie eine umgekehrte Resynchronisierung durchführen, die die D
 |===
 
 
+.Ergebnis
 Nachdem Sie eine Aktion ausgewählt haben, aktualisiert BlueXP die Beziehung oder den Zeitplan.
